@@ -1,12 +1,12 @@
-import { useMemo } from 'react';
-import { Flex, Button, Alert, Stack, Group, Text } from "@mantine/core";
-import { IconAlertCircle, IconCirclePlus } from '@tabler/icons-react';
+import { useMemo } from "react";
+import { IconAlertCircle, IconCirclePlus } from "@tabler/icons-react";
 import InputSearch from "../InputSearch";
 import CrudActionButtons, { CrudActionProps } from "../CrudActionButtons";
 import { useLocation } from "react-router-dom";
 import { useFeaturePermissions } from "../../features/accessControl/hooks/permissions";
+import { Button, Group, Flex, Stack, Alert, Text } from "../base";
 
-interface Props{
+interface Props {
   buttonTitle: string;
   onButtonClick: () => void;
   actions?: CrudActionProps[];
@@ -15,8 +15,14 @@ interface Props{
   canCreate?: boolean;
 }
 
-function CrudHeader({ onButtonClick, buttonTitle, actions, showActions = false, onSearch, canCreate }: Props){
-
+function CrudHeader({
+  onButtonClick,
+  buttonTitle,
+  actions,
+  showActions = false,
+  onSearch,
+  canCreate,
+}: Props) {
   const location = useLocation();
   const permissionsChecker = useFeaturePermissions();
 
@@ -29,13 +35,13 @@ function CrudHeader({ onButtonClick, buttonTitle, actions, showActions = false, 
   return (
     <Stack>
       <Flex justify={"space-between"}>
-        <Flex w={800}>
+        <Flex>
           <InputSearch onChange={onSearch} />
         </Flex>
         {canCreate ? (
           <Button
             onClick={onButtonClick}
-            leftIcon={<IconCirclePlus size="1rem" />}
+            leftSection={<IconCirclePlus size="1rem" />}
             size="xs"
           >
             {buttonTitle}
@@ -44,13 +50,13 @@ function CrudHeader({ onButtonClick, buttonTitle, actions, showActions = false, 
           <></>
         )}
       </Flex>
-      {(showActions && canCreate) ? (
+      {showActions && canCreate ? (
         <Alert
           icon={<IconAlertCircle size="1rem" />}
           title="Bummer!"
           color="blue"
         >
-          <Group position="apart">
+          <Group>
             <Text>
               Something terrible happened! You made a mistake and there is no
               going back, your data was lost forever!
@@ -63,7 +69,6 @@ function CrudHeader({ onButtonClick, buttonTitle, actions, showActions = false, 
       )}
     </Stack>
   );
-
 }
 
 export default CrudHeader;
