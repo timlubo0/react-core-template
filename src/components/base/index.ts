@@ -20,3 +20,4 @@ export * from './Progress';
 export * from './Box';
 export * from './Popover';
 export * from './TextInput';
+export * from './Textarea';
