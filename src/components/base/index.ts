@@ -24,3 +24,4 @@ export * from './Textarea';
 export * from './Modal';
 export * from './Badge';
 export * from './Anchor';
+export * from './Title';

@@ -1,5 +1,12 @@
 import { useMemo } from "react";
-import { Box, Group, Title, Badge, Loader, Center } from "@mantine/core";
+import {
+  Box,
+  Group,
+  Title,
+  Badge,
+  Loader,
+  Center,
+} from "../../../components/base";
 import { useParams } from "react-router-dom";
 import { useRole } from "../hooks/roles";
 import PermissionsForm from "../components/forms/PermissionsForm";
@@ -7,8 +14,7 @@ import { IPermission } from "../types";
 import { usePermissionsMutation } from "../hooks/permissions";
 import { toast } from "../../../utils/toast";
 
-function RolePermissionsScreen(){
-
+function RolePermissionsScreen() {
   const { uid } = useParams();
   const roleQuery = useRole(`${uid}`);
 
@@ -30,7 +36,7 @@ function RolePermissionsScreen(){
 
   const mutation = usePermissionsMutation({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         toast.success();
         return null;
       }
@@ -39,22 +45,22 @@ function RolePermissionsScreen(){
     onError: () => {
       toast.error();
     },
-    uid: uid || ''
+    uid: uid || "",
   });
 
   const handleSubmit = (data: IPermission[]) => {
-    console.log(data)
-    const permissions = data.map((permission) => ({      
+    console.log(data);
+    const permissions = data.map((permission) => ({
       role_id: permission.role.id,
       feature_id: permission.feature.id,
       can_create: permission.canCreate,
       can_read: permission.canRead,
       can_update: permission.canUpdate,
-      can_delete: permission.canDelete
+      can_delete: permission.canDelete,
     }));
 
     mutation.mutate(permissions);
-  }
+  };
 
   return (
     <Box p={"lg"}>
@@ -64,7 +70,7 @@ function RolePermissionsScreen(){
           <Badge tt={"capitalize"}>{roleQuery.data.name}</Badge>
         )}
       </Group>
-      {(!roleQuery.isLoading && roleQuery.data && permissions) && (
+      {!roleQuery.isLoading && roleQuery.data && permissions && (
         <PermissionsForm
           onSubmit={handleSubmit}
           isLoading={mutation.isLoading}
@@ -72,12 +78,13 @@ function RolePermissionsScreen(){
           permissions={permissions}
         />
       )}
-      {
-        roleQuery.isLoading && <Center><Loader /></Center>
-      }
+      {roleQuery.isLoading && (
+        <Center>
+          <Loader />
+        </Center>
+      )}
     </Box>
   );
-
 }
 
 export default RolePermissionsScreen;
