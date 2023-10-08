@@ -1,36 +1,30 @@
-import { useMantineColorScheme, SegmentedControl, Group, Center, Box } from '@mantine/core';
-import { IconSun, IconMoon } from '@tabler/icons-react';
+import cx from "clsx";
+import { useMantineColorScheme, useComputedColorScheme } from "@mantine/core";
+import { IconSun, IconMoon } from "@tabler/icons-react";
+import classes from "./ActionToggle.module.css";
+import { ActionIcon, Group } from "../base";
 
-export default function ThemeModeSwitcher() {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+function ThemeModeSwitcher() {
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
 
   return (
-    <Group position="center">
-      <SegmentedControl
-        value={colorScheme}
-        onChange={(value: 'light' | 'dark') => toggleColorScheme(value)}
-        data={[
-          {
-            value: 'light',
-            label: (
-              <Center>
-                <IconSun size="1rem" stroke={1.5} />
-                <Box ml={10}>Light</Box>
-              </Center>
-            ),
-          },
-          {
-            value: 'dark',
-            label: (
-              <Center>
-                <IconMoon size="1rem" stroke={1.5} />
-                <Box ml={10}>Dark</Box>
-              </Center>
-            ),
-          },
-        ]}
-        role='button'
-      />
+    <Group justify="center">
+      <ActionIcon
+        onClick={() =>
+          setColorScheme(computedColorScheme === "light" ? "dark" : "light")
+        }
+        variant="default"
+        size="xl"
+        aria-label="Toggle color scheme"
+      >
+        <IconSun className={cx(classes.icon, classes.light)} stroke={1.5} />
+        <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5} />
+      </ActionIcon>
     </Group>
   );
 }
+
+export default ThemeModeSwitcher;
