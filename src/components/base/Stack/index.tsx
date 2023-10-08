@@ -1,5 +1,15 @@
-import { Stack as MStack, MantineSpacing } from "@mantine/core";
-export interface StackProps {
+import {
+  BoxProps,
+  ElementProps,
+  Stack as MStack,
+  MantineSpacing,
+  StackFactory,
+  StylesApiProps,
+} from "@mantine/core";
+export interface StackProps
+  extends BoxProps,
+    StylesApiProps<StackFactory>,
+    ElementProps<"div"> {
   gap?: MantineSpacing;
   align?: React.CSSProperties["alignItems"];
   justify?: React.CSSProperties["justifyContent"];
