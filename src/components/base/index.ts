@@ -25,3 +25,5 @@ export * from './Modal';
 export * from './Badge';
 export * from './Anchor';
 export * from './Title';
+export * from './Avatar';
+export * from './UnstyledButton';
