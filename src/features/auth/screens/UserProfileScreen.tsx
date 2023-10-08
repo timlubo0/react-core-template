@@ -1,12 +1,10 @@
 import { useAuth } from "../hooks/auth";
 import UserDetailsScreen from "./UserDetailsScreen";
 
-function UserProfileScreen(){
+function UserProfileScreen() {
+  const { user } = useAuth();
 
-    const { user } = useAuth();
-
-    return <UserDetailsScreen user={user} />
-
+  return <UserDetailsScreen user={user} />;
 }
 
 export default UserProfileScreen;

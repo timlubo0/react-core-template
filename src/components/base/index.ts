@@ -29,3 +29,6 @@ export * from './Avatar';
 export * from './UnstyledButton';
 export * from './PasswordInput';
 export * from './Select';
+export * from './Paper';
+export * from './Skeleton';
+export * from './Tabs';

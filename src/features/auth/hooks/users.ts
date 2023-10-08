@@ -6,44 +6,39 @@ import { IUser } from "../types";
 import { IMutationProps } from "../../types";
 
 export const useUsers = (params?: IPaginationQueryParams) => {
-  const { data, ...rest } = useQuery(
-    {
-      queryKey: [endPoints.users, params], 
-      queryFn: () => usersService.findAll(params),
-      keepPreviousData: true,
-      staleTime: Infinity,
-      enabled: true
-    },
-  );
+  const { data, ...rest } = useQuery({
+    queryKey: [endPoints.users, params],
+    queryFn: () => usersService.findAll(params),
+    keepPreviousData: true,
+    staleTime: Infinity,
+    enabled: true,
+  });
 
   return {
     data: data?.data || [],
     meta: data?.meta || {},
     errorResponse: data?.meta == undefined && !rest.isLoading,
-    ...rest
+    ...rest,
   };
 };
 
-
 export const useUser = (uid: string) => {
-  const { data, ...rest } = useQuery(
-    {
-      queryKey: [`${endPoints.users}${uid}`], 
-      queryFn: () => usersService.find(uid),
-    },
-  );
+  const { data, ...rest } = useQuery({
+    queryKey: [`${endPoints.users}${uid}`],
+    queryFn: () => usersService.find(uid),
+  });
 
   return {
     data: data,
     errorResponse: data?.id == undefined && !rest.isLoading,
-    ...rest
+    ...rest,
   };
 };
 
 export const useUsersMutation = ({
   onSuccess,
   onError,
-  model
+  model,
 }: IMutationProps<IUser>) => {
   const queryClient = useQueryClient();
 
@@ -64,7 +59,7 @@ export const useUsersMutation = ({
 
 export const useUserDelete = ({
   onSuccess,
-  onError
+  onError,
 }: IMutationProps<IUser>) => {
   const queryClient = useQueryClient();
 
@@ -79,4 +74,3 @@ export const useUserDelete = ({
     },
   });
 };
-  

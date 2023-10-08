@@ -12,7 +12,7 @@ export interface BoxProps extends MantineStyleProps {
   __vars?: CssVarsProp;
   hiddenFrom?: MantineBreakpoint;
   visibleFrom?: MantineBreakpoint;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const Box = (props: BoxProps) => <MBox {...props} />;
