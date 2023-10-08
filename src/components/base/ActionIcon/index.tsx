@@ -1,13 +1,20 @@
 import {
+  ActionIconFactory,
+  BoxProps,
   LoaderProps,
   ActionIcon as MActionIcon,
   MantineColor,
   MantineGradient,
   MantineRadius,
   MantineSize,
+  StylesApiProps,
 } from "@mantine/core";
+import { DOMAttributes } from "react";
 
-export interface ActionIconProps {
+export interface ActionIconProps
+  extends BoxProps,
+    StylesApiProps<ActionIconFactory>,
+    DOMAttributes<HTMLButtonElement> {
   __staticSelector?: string;
   loading?: boolean;
   loaderProps?: LoaderProps;

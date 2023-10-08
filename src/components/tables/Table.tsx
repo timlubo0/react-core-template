@@ -1,13 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { getCoreRowModel, useReactTable, flexRender, getPaginationRowModel } from '@tanstack/react-table';
-import type { ColumnDef, FilterFn } from '@tanstack/react-table';
-import { filterFns } from './filterFns';
-import { DebouncedInput } from './DebouncedInput';
-import Pagination from './Pagination';
-import { createStyles, Table as CTable, Checkbox, ScrollArea, rem, ActionIcon, Center, Loader, LoadingOverlay, Alert, Button, Flex, Text } from '@mantine/core';
-import { IconPencil, IconAlertCircle } from '@tabler/icons-react';
-import { useLocation } from 'react-router-dom';
-import { useFeaturePermissions } from '../../features/accessControl/hooks/permissions';
+import React, { useState, useEffect } from "react";
+import {
+  getCoreRowModel,
+  useReactTable,
+  flexRender,
+  getPaginationRowModel,
+} from "@tanstack/react-table";
+import type { ColumnDef, FilterFn } from "@tanstack/react-table";
+import { filterFns } from "./filterFns";
+import { DebouncedInput } from "./DebouncedInput";
+import Pagination from "./Pagination";
+import { rem } from "@mantine/core";
+import {
+  ActionIcon,
+  Table as CTable,
+  Checkbox,
+  ScrollArea,
+  Loader,
+  Alert,
+  Flex,
+  Text,
+  Button,
+  LoadingOverlay,
+  Center,
+} from "../base";
+import { IconPencil, IconAlertCircle } from "@tabler/icons-react";
 
 interface ReactTableProps<T extends object> {
   data: T[];
@@ -21,7 +37,7 @@ interface ReactTableProps<T extends object> {
     currentPage: number;
     pageSize: number;
     total: number;
-  }
+  };
   onPageChange: (page: number) => void;
   isEditable?: boolean;
   isSelectable?: boolean;
@@ -29,15 +45,6 @@ interface ReactTableProps<T extends object> {
   onEdit?: (row: any) => void;
   error?: boolean;
 }
-
-const useStyles = createStyles((theme) => ({
-  rowSelected: {
-    backgroundColor:
-      theme.colorScheme === 'dark'
-        ? theme.fn.rgba(theme.colors[theme.primaryColor][7], 0.2)
-        : theme.colors[theme.primaryColor][0],
-  },
-}));
 
 export const Table = <T extends object>({
   data,
@@ -53,7 +60,7 @@ export const Table = <T extends object>({
   isSelectable = true,
   onEdit,
   onSelect,
-  error = false
+  error = false,
 }: ReactTableProps<T>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -68,47 +75,49 @@ export const Table = <T extends object>({
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: filterFn,
     pageCount: Math.ceil(meta.total / meta.pageSize),
-    manualPagination: true
+    manualPagination: true,
   });
 
-  const { classes, cx } = useStyles();
   const [selection, setSelection] = useState<Array<any>>([]);
-  const [selectedRows, setSelectedRows] = useState<Array<string>>(['']);
+  const [selectedRows, setSelectedRows] = useState<Array<string>>([""]);
 
   const toggleRow = (value: any) => {
     setSelection((current) =>
       selectedRows.includes(value?.index)
-          ? current.filter((item) => item?.index !== value?.index)
-          : [...current, value]
+        ? current.filter((item) => item?.index !== value?.index)
+        : [...current, value]
     );
     setSelectedRows((current) =>
       current.includes(value?.index)
         ? current.filter((item) => item !== value?.index)
         : [...current, value?.index]
     );
-  }
-    
+  };
+
   const toggleAll = () => {
     setSelection((current) =>
       current.length === data.length
         ? []
-        : table.getRowModel().rows.map((item) => ({...item.original, ...{ index: item.id }}))
+        : table
+            .getRowModel()
+            .rows.map((item) => ({ ...item.original, ...{ index: item.id } }))
     );
     setSelectedRows((current) =>
       current.length === data.length
         ? []
         : table.getRowModel().rows.map((item) => item.id)
     );
-  }
+  };
 
   useEffect(() => {
     onSelect?.(selection);
-  }, [selectedRows])
-    
+  }, [selectedRows]);
+
   const rows = table.getRowModel().rows.map((row) => {
     const selected = selection.includes(row.id);
     return (
-      <tr key={row.id} className={cx({ [classes.rowSelected]: selected })}>
+      // selected row set style
+      <tr key={row.id}>
         {isSelectable && (
           <td>
             <Checkbox
@@ -116,7 +125,6 @@ export const Table = <T extends object>({
               onChange={() =>
                 toggleRow({ ...row.original, ...{ index: row.id } })
               }
-              transitionDuration={0}
             />
           </td>
         )}
@@ -153,7 +161,7 @@ export const Table = <T extends object>({
               placeholder="Search all columns..."
             />
           ) : null}
-          {isFetching && <LoadingOverlay visible={true} overlayBlur={1} />}
+          {isFetching && <LoadingOverlay visible={true} />}
           <CTable w={"100%"} verticalSpacing="sm">
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -167,7 +175,6 @@ export const Table = <T extends object>({
                           selection.length > 0 &&
                           selection.length !== data.length
                         }
-                        transitionDuration={0}
                       />
                     </th>
                   )}
@@ -206,9 +213,11 @@ export const Table = <T extends object>({
           title="Erreur reseau!"
           color="red"
         >
-          <Flex justify={'space-between'}>
+          <Flex justify={"space-between"}>
             <Text>Erreur lors de la lecture des données!</Text>
-            <Button onClick={() => window.location.reload()} size='xs'>Actualiser</Button>
+            <Button onClick={() => window.location.reload()} size="xs">
+              Actualiser
+            </Button>
           </Flex>
         </Alert>
       )}

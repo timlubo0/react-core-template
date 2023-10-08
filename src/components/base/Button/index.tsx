@@ -6,7 +6,7 @@ import {
   LoaderProps,
   Button as MButton,
 } from "@mantine/core";
-import { DOMAttributes, ReactEventHandler } from "react";
+import { DOMAttributes } from "react";
 
 export interface ButtonProps {
   "data-disabled"?: boolean;
