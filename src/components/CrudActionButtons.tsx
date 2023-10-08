@@ -1,5 +1,6 @@
-import { Button, Menu } from '@mantine/core';
+import { Menu } from '@mantine/core';
 import { IconChevronDown } from "@tabler/icons-react";
+import { Button } from './base';
 
 export interface CrudActionsProps{
     actions?: Array<CrudActionProps>;
@@ -22,8 +23,7 @@ function CrudActionButtons({ actions }: CrudActionsProps) {
         >
         <Menu.Target>
             <Button
-                rightIcon={<IconChevronDown size="1.05rem" stroke={1.5} />}
-                pr={12}
+                rightSection={<IconChevronDown size="1.05rem" stroke={1.5} />}
                 size='xs'
             >
                 Choisissez une action
@@ -33,7 +33,7 @@ function CrudActionButtons({ actions }: CrudActionsProps) {
             {actions?.map((action) => (
             <Menu.Item
                 key={action.title}
-                icon={
+                rightSection={
                     <action.icon
                         size="1rem"
                         color={action.color}

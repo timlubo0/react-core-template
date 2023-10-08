@@ -13,3 +13,4 @@ export * from './ScrollArea';
 export * from './Loader';
 export * from './LoadingOverlay';
 export * from './Center';
+export * from './Menu';
