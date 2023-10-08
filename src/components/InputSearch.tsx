@@ -1,15 +1,14 @@
-import { TextInput, TextInputProps } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { TextInput } from "./base";
+import { IconSearch } from "@tabler/icons-react";
 
-interface Props{
+interface Props {
   onChange?: (keyword: string) => void;
 }
 
 export default function InputSearch({ onChange }: Props) {
-
   return (
     <TextInput
-      icon={<IconSearch size="1.1rem" stroke={1.5} />}
+      leftSection={<IconSearch size="1.1rem" stroke={1.5} />}
       radius="xl"
       size="xs"
       placeholder="Rechercher..."
