@@ -1,6 +1,17 @@
-import { Flex as MFlex, MantineSize, StyleProp } from "@mantine/core";
+import {
+  BoxProps,
+  ElementProps,
+  FlexFactory,
+  Flex as MFlex,
+  MantineSize,
+  StyleProp,
+  StylesApiProps,
+} from "@mantine/core";
 
-export interface FlexProps {
+export interface FlexProps
+  extends BoxProps,
+    StylesApiProps<FlexFactory>,
+    ElementProps<"div"> {
   gap?: StyleProp<MantineSize | (string & {}) | number>;
   rowGap?: StyleProp<MantineSize | (string & {}) | number>;
   columnGap?: StyleProp<MantineSize | (string & {}) | number>;

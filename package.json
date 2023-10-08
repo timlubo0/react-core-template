@@ -81,10 +81,15 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-module-resolver": "^5.0.0",
     "postcss": "^8.4.31",
     "postcss-preset-mantine": "^1.8.0",
     "postcss-simple-vars": "^7.0.1",
-    "react-test-renderer": "^18.2.0"
+    "react-app-rewired": "^2.2.1",
+    "react-test-renderer": "^18.2.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "jest": {
     "moduleNameMapper": {

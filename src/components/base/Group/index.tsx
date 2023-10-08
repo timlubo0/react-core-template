@@ -1,7 +1,17 @@
-import { Group as MGroup, MantineSpacing } from "@mantine/core";
+import {
+  BoxProps,
+  ElementProps,
+  GroupFactory,
+  Group as MGroup,
+  MantineSpacing,
+  StylesApiProps,
+} from "@mantine/core";
 import { ReactNode } from "react";
 
-export interface GroupProps {
+export interface GroupProps
+  extends BoxProps,
+    StylesApiProps<GroupFactory>,
+    ElementProps<"div"> {
   size?: any;
   justify?: React.CSSProperties["justifyContent"];
   align?: React.CSSProperties["alignItems"];
@@ -20,7 +30,7 @@ export const Group = ({
   gap,
   grow,
   preventGrowOverflow,
-  children
+  children,
 }: GroupProps) => {
   return (
     <MGroup

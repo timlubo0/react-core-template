@@ -5,10 +5,13 @@ import {
   MantineGradient,
   LoaderProps,
   Button as MButton,
+  BoxProps,
+  ButtonFactory,
+  StylesApiProps,
 } from "@mantine/core";
 import { DOMAttributes } from "react";
 
-export interface ButtonProps {
+export interface ButtonProps extends BoxProps, StylesApiProps<ButtonFactory> {
   "data-disabled"?: boolean;
   size?: MantineSize | `compact-${MantineSize}` | (string & {});
   color?: MantineColor;
@@ -22,6 +25,7 @@ export interface ButtonProps {
   children?: React.ReactNode;
   loading?: boolean;
   loaderProps?: LoaderProps;
+  type?: "button" | "submit" | "reset"
 }
 
 type Props = ButtonProps & (DOMAttributes<HTMLButtonElement> | undefined);
