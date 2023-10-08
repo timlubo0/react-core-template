@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "../../../../components/tables/Table";
 import { filterFns } from "../../../../components/tables/filterFns";
 import { IUser } from "../../types";
 import { useUsers } from "../../hooks/users";
-import { Badge, Anchor } from '@mantine/core';
+import { Badge, Anchor } from "../../../../components/base";
 import { Link } from "react-router-dom";
 import { Routes } from "../../../../navigation/routes";
 import { useFeaturePermissions } from "../../../accessControl/hooks/permissions";
 
-interface Props{
+interface Props {
   filters: {
     keyword?: string;
   };
@@ -17,8 +17,7 @@ interface Props{
   onEdit?: (user: IUser) => void;
 }
 
-function UsersTable({ filters, onSelect, onEdit }: Props){
-
+function UsersTable({ filters, onSelect, onEdit }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { keyword } = filters;
 
@@ -39,7 +38,7 @@ function UsersTable({ filters, onSelect, onEdit }: Props){
         header: "Name",
         cell: (cell) => (
           <Link to={`${Routes.users}/${cell.row.original.uid}`}>
-            <Anchor component="span" fz="sm">{`${cell.renderValue()}`}</Anchor>
+            <Anchor fz="sm">{`${cell.renderValue()}`}</Anchor>
           </Link>
         ),
         accessorKey: "name",
@@ -56,12 +55,7 @@ function UsersTable({ filters, onSelect, onEdit }: Props){
       },
       {
         header: "Role",
-        cell: (row) => (
-          <Badge
-            component="span"
-            tt={"lowercase"}
-          >{`${row.renderValue()}`}</Badge>
-        ),
+        cell: (row) => <Badge tt={"lowercase"}>{`${row.renderValue()}`}</Badge>,
         accessorKey: "role.name",
       },
     ],
@@ -70,7 +64,7 @@ function UsersTable({ filters, onSelect, onEdit }: Props){
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  }
+  };
 
   return (
     <>
