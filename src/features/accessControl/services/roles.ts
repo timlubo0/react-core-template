@@ -1,6 +1,10 @@
 import { api } from "../../../api/api";
 import { endPoints } from "../../../api/endPoints";
-import { IPaginationQueryParams, IQueryResults, PostPutResponse } from "../../../api/types";
+import {
+  IPaginationQueryParams,
+  IQueryResults,
+  PostPutResponse,
+} from "../../../api/types";
 import { IRole } from "../types";
 
 export const rolesService = {
@@ -11,7 +15,11 @@ export const rolesService = {
   find: (uid: string): Promise<IRole> =>
     api.get({ endPoint: `${endPoints.roles}/${uid}` }),
   update: (payLoad: IRole, uid: string): Promise<PostPutResponse<IRole>> =>
-    api.post({ endPoint: `${endPoints.roles}/${uid}`, data: payLoad, method: "PUT" }),
+    api.post({
+      endPoint: `${endPoints.roles}/${uid}`,
+      data: payLoad,
+      method: "PUT",
+    }),
   delete: (uid: string): Promise<PostPutResponse<IRole>> =>
     api.get({ endPoint: `${endPoints.roles}/${uid}`, method: "DELETE" }),
 };

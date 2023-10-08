@@ -1,6 +1,10 @@
 import { api } from "../../../api/api";
 import { endPoints } from "../../../api/endPoints";
-import { IPaginationQueryParams, IQueryResults, PostPutResponse } from "../../../api/types";
+import {
+  IPaginationQueryParams,
+  IQueryResults,
+  PostPutResponse,
+} from "../../../api/types";
 import { IPermission } from "../types";
 
 export const permissionsService = {
