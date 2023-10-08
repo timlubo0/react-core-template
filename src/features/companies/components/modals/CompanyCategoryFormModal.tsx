@@ -1,24 +1,28 @@
-import { Modal } from '@mantine/core';
-import { ICompanyCategory } from '../../types';
-import { toast } from '../../../../utils/toast';
-import CompanyCategoryForm from '../forms/CompanyCategoryForm';
-import { useCompanyCategoriesMutation } from '../../hooks/companyCategories';
+import { Modal } from "src/components/base";
+import { ICompanyCategory } from "../../types";
+import { toast } from "../../../../utils/toast";
+import CompanyCategoryForm from "../forms/CompanyCategoryForm";
+import { useCompanyCategoriesMutation } from "../../hooks/companyCategories";
 
-interface Props{
-    opened: boolean;
-    onClose: () => void;
-    category?: ICompanyCategory; 
-    centered?: boolean; 
+interface Props {
+  opened: boolean;
+  onClose: () => void;
+  category?: ICompanyCategory;
+  centered?: boolean;
 }
 
-function CompanyCategoryFormModal({ opened, onClose, category, centered = true }: Props) {
-
+function CompanyCategoryFormModal({
+  opened,
+  onClose,
+  category,
+  centered = true,
+}: Props) {
   const mutation = useCompanyCategoriesMutation({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         onClose();
         toast.success();
-        
+
         return null;
       }
 
@@ -27,11 +31,11 @@ function CompanyCategoryFormModal({ opened, onClose, category, centered = true }
     onError: () => {
       toast.error();
     },
-    model: category
+    model: category,
   });
 
   const handleSubmit = (category: ICompanyCategory) => {
-      mutation.mutate(category);
+    mutation.mutate(category);
   };
 
   return (

@@ -32,3 +32,8 @@ export * from './Select';
 export * from './Paper';
 export * from './Skeleton';
 export * from './Tabs';
+export * from './HoverCard';
+export * from './Divider';
+export * from './Indicator';
+export * from './ThemeIcon';
+export * from './NumberInput';

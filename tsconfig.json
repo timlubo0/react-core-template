@@ -21,17 +21,6 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@base/*": ["src/components/base/*"],
-      "@features/*": ["src/features/*"],
-      "@navigation/*": ["src/navigation/*"],
-      "@api/*": ["src/api/*"],
-      "@store/*": ["src/store/*"],
-      "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": [
-    "src"
-, "src/features/vehicules/services/vehicleMarks.ts", "src/features/report/hooks/reports.ts"  ]
 }

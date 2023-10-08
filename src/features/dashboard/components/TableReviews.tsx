@@ -1,14 +1,4 @@
-import { createStyles, Table, Progress, Anchor, Text, Group, ScrollArea, rem } from '@mantine/core';
-
-const useStyles = createStyles((theme) => ({
-  progressBar: {
-    '&:not(:first-of-type)': {
-      borderLeft: `${rem(3)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white
-      }`,
-    },
-  },
-}));
+import { Table, Anchor, Text, Group, ScrollArea } from "src/components/base";
 
 interface TableReviewsProps {
   data: {
@@ -20,8 +10,6 @@ interface TableReviewsProps {
 }
 
 export function TableReviews() {
-  const { classes, theme } = useStyles();
-
   const rows = data.map((row) => {
     const totalReviews = row.reviews.negative + row.reviews.positive;
     const positiveReviews = (row.reviews.positive / totalReviews) * 100;
@@ -30,39 +18,26 @@ export function TableReviews() {
     return (
       <tr key={row.title}>
         <td>
-          <Anchor component="button" fz="sm">
+          <Anchor fz="sm">
             {row.title}
           </Anchor>
         </td>
         <td>{row.year}</td>
         <td>
-          <Anchor component="button" fz="sm">
+          <Anchor fz="sm">
             {row.author}
           </Anchor>
         </td>
         <td>{Intl.NumberFormat().format(totalReviews)}</td>
         <td>
-          <Group position="apart">
-            <Text fz="xs" c="teal" weight={700}>
+          <Group align="apart">
+            <Text fz="xs" c="teal" w={700}>
               {positiveReviews.toFixed(0)}%
             </Text>
-            <Text fz="xs" c="red" weight={700}>
+            <Text fz="xs" c="red" w={700}>
               {negativeReviews.toFixed(0)}%
             </Text>
           </Group>
-          <Progress
-            classNames={{ bar: classes.progressBar }}
-            sections={[
-              {
-                value: positiveReviews,
-                color: theme.colorScheme === 'dark' ? theme.colors.teal[9] : theme.colors.teal[6],
-              },
-              {
-                value: negativeReviews,
-                color: theme.colorScheme === 'dark' ? theme.colors.red[9] : theme.colors.red[6],
-              },
-            ]}
-          />
         </td>
       </tr>
     );
@@ -70,7 +45,7 @@ export function TableReviews() {
 
   return (
     <ScrollArea>
-      <Table sx={{ minWidth: 800 }} verticalSpacing="xs">
+      <Table verticalSpacing="xs">
         <thead>
           <tr>
             <th>Book title</th>
@@ -87,58 +62,58 @@ export function TableReviews() {
 }
 
 const data = [
-    {
-      "title": "Foundation",
-      "author": "Isaac Asimov",
-      "year": 1951,
-      "reviews": {
-        "positive": 2223,
-        "negative": 259
-      }
+  {
+    title: "Foundation",
+    author: "Isaac Asimov",
+    year: 1951,
+    reviews: {
+      positive: 2223,
+      negative: 259,
     },
-    {
-      "title": "Frankenstein",
-      "author": "Mary Shelley",
-      "year": 1818,
-      "reviews": {
-        "positive": 5677,
-        "negative": 1265
-      }
+  },
+  {
+    title: "Frankenstein",
+    author: "Mary Shelley",
+    year: 1818,
+    reviews: {
+      positive: 5677,
+      negative: 1265,
     },
-    {
-      "title": "Solaris",
-      "author": "Stanislaw Lem",
-      "year": 1961,
-      "reviews": {
-        "positive": 3487,
-        "negative": 1845
-      }
+  },
+  {
+    title: "Solaris",
+    author: "Stanislaw Lem",
+    year: 1961,
+    reviews: {
+      positive: 3487,
+      negative: 1845,
     },
-    {
-      "title": "Dune",
-      "author": "Frank Herbert",
-      "year": 1965,
-      "reviews": {
-        "positive": 8576,
-        "negative": 663
-      }
+  },
+  {
+    title: "Dune",
+    author: "Frank Herbert",
+    year: 1965,
+    reviews: {
+      positive: 8576,
+      negative: 663,
     },
-    {
-      "title": "The Left Hand of Darkness",
-      "author": "Ursula K. Le Guin",
-      "year": 1969,
-      "reviews": {
-        "positive": 6631,
-        "negative": 993
-      }
+  },
+  {
+    title: "The Left Hand of Darkness",
+    author: "Ursula K. Le Guin",
+    year: 1969,
+    reviews: {
+      positive: 6631,
+      negative: 993,
     },
-    {
-      "title": "A Scanner Darkly",
-      "author": "Philip K Dick",
-      "year": 1977,
-      "reviews": {
-        "positive": 8124,
-        "negative": 1847
-      }
-    }
-  ]
+  },
+  {
+    title: "A Scanner Darkly",
+    author: "Philip K Dick",
+    year: 1977,
+    reviews: {
+      positive: 8124,
+      negative: 1847,
+    },
+  },
+];

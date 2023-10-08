@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Stack } from "@mantine/core";
-import { useDisclosure } from '@mantine/hooks';
+import { Stack } from "src/components/base";
+import { useDisclosure } from "@mantine/hooks";
 import CrudHeader from "../../../components/CrudHeader";
 import { ICity } from "../types";
-import { IconTrash } from '@tabler/icons-react';
+import { IconTrash } from "@tabler/icons-react";
 import { CrudActionProps } from "../../../components/CrudActionButtons";
 import CitiesTable from "../components/tables/CitiesTable";
 import CityFormModal from "../components/modals/CityFormModal";
@@ -11,8 +11,7 @@ import { deleteModal } from "../../../utils/modal";
 import { useCityDelete } from "../hooks/cities";
 import { toast } from "../../../utils/toast";
 
-function CitiesScreen(){
-
+function CitiesScreen() {
   const cityFormModal = useDisclosure(false);
   const [city, setCity] = useState<ICity>();
   const [selectedCities, setSelectedCities] = useState<ICity[]>([]);
@@ -21,7 +20,7 @@ function CitiesScreen(){
 
   const deleteMutation = useCityDelete({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         toast.success();
         return null;
       }
@@ -48,18 +47,18 @@ function CitiesScreen(){
   const handleSelection = (cities: ICity[]) => {
     cities.length > 0 ? setShowActions(true) : setShowActions(false);
     setSelectedCities(cities);
-  }
+  };
 
   const handleEdit = (city: ICity) => {
     setCity(city);
     cityFormModal[1].open();
-  }
+  };
 
   const handleAdd = () => {
     setCity(undefined);
     cityFormModal[1].open();
-  }
-  
+  };
+
   return (
     <Stack p={"lg"}>
       <CrudHeader

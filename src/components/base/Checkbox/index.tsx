@@ -1,9 +1,7 @@
 import {
   BoxProps,
-  CheckboxCssVariables,
   CheckboxFactory,
-  CheckboxGroup,
-  CheckboxStylesNames,
+  Checkbox as MCheckbox,
   ElementProps,
   MantineColor,
   MantineComponent,
@@ -33,14 +31,4 @@ export interface CheckboxProps
   rootRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
-// export const Checkbox = (props: CheckboxProps) => <MCheckbox {...props} />;
-
-export declare const Checkbox: MantineComponent<{
-  props: CheckboxProps;
-  ref: HTMLInputElement;
-  stylesNames: CheckboxStylesNames;
-  vars: CheckboxCssVariables;
-  staticComponents: {
-    Group: typeof CheckboxGroup;
-  };
-}>;
+export const Checkbox = (props: CheckboxProps) => <MCheckbox {...props} />;

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Stack } from "@mantine/core";
-import { useDisclosure } from '@mantine/hooks';
+import { Stack } from "src/components/base";
+import { useDisclosure } from "@mantine/hooks";
 import CrudHeader from "../../../components/CrudHeader";
 import { IPayMode } from "../types";
-import { IconTrash } from '@tabler/icons-react';
+import { IconTrash } from "@tabler/icons-react";
 import { CrudActionProps } from "../../../components/CrudActionButtons";
 import PayModesTable from "../components/tables/PayModesTable";
 import PayModeFormModal from "../components/modals/PayModeFormModal";
@@ -11,8 +11,7 @@ import { deleteModal } from "../../../utils/modal";
 import { usePayModeDelete } from "../hooks/payModes";
 import { toast } from "../../../utils/toast";
 
-function PayModesScreen(){
-
+function PayModesScreen() {
   const payModeFormModal = useDisclosure(false);
   const [payMode, setPayMode] = useState<IPayMode>();
   const [selectedPayModes, setSelectedPayModes] = useState<IPayMode[]>([]);
@@ -21,7 +20,7 @@ function PayModesScreen(){
 
   const deleteMutation = usePayModeDelete({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         toast.success();
         return null;
       }
@@ -39,7 +38,9 @@ function PayModesScreen(){
       onClick: () =>
         deleteModal.show({
           onConfirm: () => {
-            selectedPayModes.map((payMode) => deleteMutation.mutate(`${payMode.uid}`));
+            selectedPayModes.map((payMode) =>
+              deleteMutation.mutate(`${payMode.uid}`)
+            );
           },
         }),
     },
@@ -48,18 +49,18 @@ function PayModesScreen(){
   const handleSelection = (payModes: IPayMode[]) => {
     payModes.length > 0 ? setShowActions(true) : setShowActions(false);
     setSelectedPayModes(payModes);
-  }
+  };
 
   const handleEdit = (payMode: IPayMode) => {
     setPayMode(payMode);
     payModeFormModal[1].open();
-  }
+  };
 
   const handleAdd = () => {
     setPayMode(undefined);
     payModeFormModal[1].open();
-  }
-  
+  };
+
   return (
     <Stack p={"lg"}>
       <CrudHeader
@@ -69,7 +70,11 @@ function PayModesScreen(){
         showActions={showActions}
         onSearch={(keyword) => setKeyword(keyword)}
       />
-      <PayModesTable onEdit={handleEdit} onSelect={handleSelection} filters={{keyword: keyword}} />
+      <PayModesTable
+        onEdit={handleEdit}
+        onSelect={handleSelection}
+        filters={{ keyword: keyword }}
+      />
       <PayModeFormModal
         opened={payModeFormModal[0]}
         onClose={payModeFormModal[1].close}

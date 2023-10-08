@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "../../../../components/tables/Table";
 import { filterFns } from "../../../../components/tables/filterFns";
 import { ICompany } from "../../types";
-import { Badge, Anchor } from '@mantine/core';
+import { Anchor } from "src/components/base";
 import { useCompanies } from "../../hooks/companies";
 import { useFeaturePermissions } from "../../../accessControl/hooks/permissions";
 import { Routes } from "../../../../navigation/routes";
 
-interface Props{
+interface Props {
   filters: {
     keyword?: string;
   };
@@ -16,8 +16,7 @@ interface Props{
   onEdit?: (company: ICompany) => void;
 }
 
-function CompaniesTable({ filters, onSelect, onEdit }: Props){
-
+function CompaniesTable({ filters, onSelect, onEdit }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { keyword } = filters;
 
@@ -37,7 +36,7 @@ function CompaniesTable({ filters, onSelect, onEdit }: Props){
       {
         header: "Name",
         cell: (row) => (
-          <Anchor component="span" fz="sm">
+          <Anchor fz="sm">
             {`${row.renderValue()}`}
           </Anchor>
         ),
@@ -64,7 +63,7 @@ function CompaniesTable({ filters, onSelect, onEdit }: Props){
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  }
+  };
 
   return (
     <>

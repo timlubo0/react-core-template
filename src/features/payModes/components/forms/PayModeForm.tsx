@@ -1,16 +1,15 @@
-import { z } from 'zod';
-import { useForm, zodResolver } from '@mantine/form';
-import { TextInput, Button, Box, Group, Textarea } from '@mantine/core';
-import { IPayMode } from '../../types';
+import { z } from "zod";
+import { useForm, zodResolver } from "@mantine/form";
+import { TextInput, Button, Box, Group, Textarea } from "src/components/base";
+import { IPayMode } from "../../types";
 
-interface Props{
+interface Props {
   onSubmit: (data: IPayMode) => void;
   isLoading: boolean;
   payMode?: IPayMode;
 }
 
 function PayModeForm({ onSubmit, isLoading, payMode }: Props) {
-
   const schema = z.object({
     name: z
       .string()
@@ -25,8 +24,8 @@ function PayModeForm({ onSubmit, isLoading, payMode }: Props) {
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
-      name: payMode?.name || '',
-      description: payMode?.description || ''
+      name: payMode?.name || "",
+      description: payMode?.description || "",
     },
   });
 
@@ -44,7 +43,7 @@ function PayModeForm({ onSubmit, isLoading, payMode }: Props) {
           placeholder="Description..."
           {...form.getInputProps("description")}
         />
-        <Group mt="xl" position="right">
+        <Group mt="xl" align="right">
           <Button mt="xl" size="sm" type="submit" loading={isLoading}>
             Enregistrer
           </Button>

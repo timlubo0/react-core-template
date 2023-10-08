@@ -1,24 +1,28 @@
-import { Modal } from '@mantine/core';
-import { IUSerPayMode } from '../../types';
-import { toast } from '../../../../utils/toast';
-import { useUserPayModesMutation } from '../../hooks/userPayModes';
-import UserPayModeForm from '../forms/UserPayModeForm';
+import { Modal } from "src/components/base";
+import { IUSerPayMode } from "../../types";
+import { toast } from "../../../../utils/toast";
+import { useUserPayModesMutation } from "../../hooks/userPayModes";
+import UserPayModeForm from "../forms/UserPayModeForm";
 
-interface Props{
+interface Props {
   opened: boolean;
   onClose: () => void;
-  userPayMode?: IUSerPayMode; 
-  centered?: boolean; 
+  userPayMode?: IUSerPayMode;
+  centered?: boolean;
 }
 
-function UserPayModeFormModal({ opened, onClose, userPayMode, centered = true }: Props) {
-
+function UserPayModeFormModal({
+  opened,
+  onClose,
+  userPayMode,
+  centered = true,
+}: Props) {
   const mutation = useUserPayModesMutation({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         onClose();
         toast.success();
-        
+
         return null;
       }
 
@@ -27,7 +31,7 @@ function UserPayModeFormModal({ opened, onClose, userPayMode, centered = true }:
     onError: () => {
       toast.error();
     },
-    model: userPayMode
+    model: userPayMode,
   });
 
   const handleSubmit = (userPayMode: IUSerPayMode) => {

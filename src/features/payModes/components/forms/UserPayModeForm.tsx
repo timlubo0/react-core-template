@@ -1,20 +1,27 @@
-import { z } from 'zod';
-import { useForm, zodResolver } from '@mantine/form';
-import { TextInput, Button, Box, Group, Textarea, NativeSelect, ActionIcon, NumberInput, Loader } from '@mantine/core';
-import { IUSerPayMode } from '../../types';
-import { IconCirclePlus } from '@tabler/icons-react';
-import { useUsers } from '../../../auth/hooks/users';
-import { usePayModes } from '../../hooks/payModes';
-import { useSelectMemo } from '../../../../hooks/useSelectMemo';
+import { z } from "zod";
+import { useForm, zodResolver } from "@mantine/form";
+import {
+  TextInput,
+  Button,
+  Box,
+  Group,
+  Select,
+  ActionIcon,
+  Loader,
+} from "src/components/base";
+import { IUSerPayMode } from "../../types";
+import { IconCirclePlus } from "@tabler/icons-react";
+import { useUsers } from "../../../auth/hooks/users";
+import { usePayModes } from "../../hooks/payModes";
+import { useSelectMemo } from "../../../../hooks/useSelectMemo";
 
-interface Props{
+interface Props {
   onSubmit: (data: IUSerPayMode) => void;
   isLoading: boolean;
   userPayMode?: IUSerPayMode;
 }
 
 function UserPayModeForm({ onSubmit, isLoading, userPayMode }: Props) {
-
   const schema = z.object({
     userId: z.string(),
     payModeId: z.string(),
@@ -27,9 +34,9 @@ function UserPayModeForm({ onSubmit, isLoading, userPayMode }: Props) {
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
-      userId: userPayMode?.user?.id || '',
-      payModeId: userPayMode?.pay_mode?.id || '',
-      number: userPayMode?.number || '',
+      userId: userPayMode?.user?.id || "",
+      payModeId: userPayMode?.pay_mode?.id || "",
+      number: userPayMode?.number || "",
     },
   });
 
@@ -52,7 +59,7 @@ function UserPayModeForm({ onSubmit, isLoading, userPayMode }: Props) {
     <Box>
       <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
         <Group grow>
-          <NativeSelect
+          <Select
             withAsterisk
             label="Utilisateur"
             placeholder="Choisissez une option"
@@ -60,14 +67,12 @@ function UserPayModeForm({ onSubmit, isLoading, userPayMode }: Props) {
             {...form.getInputProps("userId")}
             rightSection={
               <ActionIcon>
-                {!usersQuery.isLoading && (
-                  <IconCirclePlus size={"1.45rem"} />
-                )}
+                {!usersQuery.isLoading && <IconCirclePlus size={"1.45rem"} />}
                 {usersQuery.isLoading && <Loader size={"xs"} />}
               </ActionIcon>
             }
           />
-          <NativeSelect
+          <Select
             withAsterisk
             label="Mode de paiement"
             placeholder="Choisissez une option"
@@ -89,7 +94,7 @@ function UserPayModeForm({ onSubmit, isLoading, userPayMode }: Props) {
           placeholder="Phone..."
           {...form.getInputProps("number")}
         />
-        <Group mt="xl" position="right">
+        <Group mt="xl" align="right">
           <Button mt="xl" size="sm" type="submit" loading={isLoading}>
             Enregistrer
           </Button>

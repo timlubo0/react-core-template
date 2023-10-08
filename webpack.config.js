@@ -31,9 +31,14 @@ module.exports = {
               alias: {
                 "*": ".",
                 "@root": "./",
-                "@src": "./src",
-                "@components": "./src/components",
-                "@base": "./src/components/base",
+                "@src": './src',
+                "@components": './src/components',
+                "@base": './src/components/base',
+                "@features": './src/features',
+                "@navigation": '/src/navigation',
+                "@api": './src/api',
+                "@hooks": './src/hooks',
+                "@layouts": './src/layouts'
               },
             },
           ],

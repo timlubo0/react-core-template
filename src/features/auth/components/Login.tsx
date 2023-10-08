@@ -3,7 +3,6 @@ import LoginForm from "./forms/LoginForm";
 import { ILogin } from "../types";
 import { useLogin } from "../hooks/auth";
 import { toast } from "../../../utils/toast";
-import { loginStyles } from "../styles/loginStyles";
 import secureLocalStorage from "react-secure-storage";
 import { decryptData } from "../../../utils/crypto";
 
@@ -46,11 +45,9 @@ function Login() {
     login.mutate({ ...data, ...{ email: data.username } });
   };
 
-  const { classes } = loginStyles();
-
   return (
     <Box>
-      <Title order={2} className={classes.title} ta="center" mt="md" mb={20}>
+      <Title order={2} ta="center" mt="md" mb={20}>
         Bienvenue sur Lido Taxi!
       </Title>
       <Text size={"xs"} ta={"center"} mb={30}>

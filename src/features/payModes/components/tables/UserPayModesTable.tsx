@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "../../../../components/tables/Table";
 import { filterFns } from "../../../../components/tables/filterFns";
 import { IUSerPayMode } from "../../types";
-import { Anchor, Badge } from '@mantine/core';
+import { Anchor, Badge } from "src/components/base";
 import { useUserPayModes } from "../../hooks/userPayModes";
 import { useFeaturePermissions } from "../../../accessControl/hooks/permissions";
 import { Routes } from "../../../../navigation/routes";
 
-interface Props{
+interface Props {
   filters: {
     keyword?: string;
     userId?: string;
@@ -17,8 +17,7 @@ interface Props{
   onEdit?: (userPayModes: IUSerPayMode) => void;
 }
 
-function UserPayModesTable({ filters, onSelect, onEdit }: Props){
-
+function UserPayModesTable({ filters, onSelect, onEdit }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { keyword, userId } = filters;
 
@@ -27,8 +26,8 @@ function UserPayModesTable({ filters, onSelect, onEdit }: Props){
     per_page: 10,
     field: "number",
     keyword: keyword,
-    key: 'user_id',
-    value: userId
+    key: "user_id",
+    value: userId,
   });
 
   const { meta, data, isLoading, isFetching, errorResponse } = dataQuery;
@@ -39,16 +38,12 @@ function UserPayModesTable({ filters, onSelect, onEdit }: Props){
     () => [
       {
         header: "Utilisateur",
-        cell: (row) => (
-          <Anchor component="span" fz="sm">
-            {`${row.renderValue()}`}
-          </Anchor>
-        ),
+        cell: (row) => <Anchor fz="sm">{`${row.renderValue()}`}</Anchor>,
         accessorKey: "user.name",
       },
       {
         header: "Mode de paiement",
-        cell: (row) => (<Badge>{`${row.renderValue()}`}</Badge>),
+        cell: (row) => <Badge>{`${row.renderValue()}`}</Badge>,
         accessorKey: "pay_mode.name",
       },
       {
@@ -62,7 +57,7 @@ function UserPayModesTable({ filters, onSelect, onEdit }: Props){
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  }
+  };
 
   return (
     <>

@@ -8,13 +8,11 @@ import {
   Text,
 } from "../../../../components/base";
 import { IconLogout, IconSettings, IconChevronDown } from "@tabler/icons-react";
-import { styles } from "./styles";
 import { useAuth } from "../../hooks/auth";
 import { Routes } from "../../../../navigation/routes";
 import { useNavigate } from "react-router-dom";
 
 export default function UserAvatar() {
-  const { classes, cx } = styles();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -34,9 +32,7 @@ export default function UserAvatar() {
       withinPortal
     >
       <Menu.Target>
-        <UnstyledButton
-          className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
-        >
+        <UnstyledButton>
           <Group gap={7}>
             <Avatar alt={user?.name} radius="xl" size={30} color="blue">
               {user?.name?.charAt(0)}

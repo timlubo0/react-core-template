@@ -1,21 +1,28 @@
-import { z } from 'zod';
-import { useForm, zodResolver } from '@mantine/form';
-import { Button, Box, Group, NumberInput, Select, ActionIcon, Loader, NativeSelect } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IRate } from '../../types';
-import { useCurrencies } from '../../../currencies/hooks/currencies';
-import { useSelectMemo } from '../../../../hooks/useSelectMemo';
-import { IconCirclePlus } from '@tabler/icons-react';
-import CurrencyFormModal from '../../../currencies/components/modals/CurrencyFormModal';
+import { z } from "zod";
+import { useForm, zodResolver } from "@mantine/form";
+import {
+  Button,
+  Box,
+  Group,
+  NumberInput,
+  Select,
+  ActionIcon,
+  Loader,
+} from "src/components/base";
+import { useDisclosure } from "@mantine/hooks";
+import { IRate } from "../../types";
+import { useCurrencies } from "../../../currencies/hooks/currencies";
+import { useSelectMemo } from "../../../../hooks/useSelectMemo";
+import { IconCirclePlus } from "@tabler/icons-react";
+import CurrencyFormModal from "../../../currencies/components/modals/CurrencyFormModal";
 
-interface Props{
+interface Props {
   onSubmit: (data: IRate) => void;
   isLoading: boolean;
   rate?: IRate;
 }
 
 function RateForm({ onSubmit, isLoading, rate }: Props) {
-
   const currencyFormModal = useDisclosure();
 
   const schema = z.object({
@@ -27,8 +34,8 @@ function RateForm({ onSubmit, isLoading, rate }: Props) {
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
-      currencyId: rate?.currency?.id || '',
-      currencyToId: rate?.currencyTo?.id || '',
+      currencyId: rate?.currency?.id || "",
+      currencyToId: rate?.currencyTo?.id || "",
       amount: rate?.amount || 0,
     },
   });
@@ -44,7 +51,7 @@ function RateForm({ onSubmit, isLoading, rate }: Props) {
     <Box>
       <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
         <Group grow>
-          <NativeSelect
+          <Select
             withAsterisk
             label="Devise d'origine"
             placeholder="Choisissez une devise"
@@ -59,7 +66,7 @@ function RateForm({ onSubmit, isLoading, rate }: Props) {
               </ActionIcon>
             }
           />
-          <NativeSelect
+          <Select
             withAsterisk
             label="Devise de destination"
             placeholder="Choisissez une devise"
@@ -79,10 +86,9 @@ function RateForm({ onSubmit, isLoading, rate }: Props) {
           withAsterisk
           label="Taux de change"
           placeholder="Taux de change..."
-          type="number"
           {...form.getInputProps("amount")}
         />
-        <Group mt="xl" position="right">
+        <Group mt="xl" align="right">
           <Button mt="xl" size="sm" type="submit" loading={isLoading}>
             Enregistrer
           </Button>

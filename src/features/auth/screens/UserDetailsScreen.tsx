@@ -1,3 +1,4 @@
+import { Tabs } from "@mantine/core";
 import {
   Group,
   Paper,
@@ -9,7 +10,6 @@ import {
   Title,
   Text,
   Button,
-  Tabs,
   Badge,
   Skeleton,
 } from "../../../components/base";

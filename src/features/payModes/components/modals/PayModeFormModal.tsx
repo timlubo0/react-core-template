@@ -1,24 +1,28 @@
-import { Modal } from '@mantine/core';
-import { IPayMode } from '../../types';
-import { toast } from '../../../../utils/toast';
-import PayModeForm from '../forms/PayModeForm';
-import { usePayModesMutation } from '../../hooks/payModes';
+import { Modal } from "src/components/base";
+import { IPayMode } from "../../types";
+import { toast } from "../../../../utils/toast";
+import PayModeForm from "../forms/PayModeForm";
+import { usePayModesMutation } from "../../hooks/payModes";
 
-interface Props{
+interface Props {
   opened: boolean;
   onClose: () => void;
-  payMode?: IPayMode; 
-  centered?: boolean; 
+  payMode?: IPayMode;
+  centered?: boolean;
 }
 
-function PayModeFormModal({ opened, onClose, payMode, centered = true }: Props) {
-
+function PayModeFormModal({
+  opened,
+  onClose,
+  payMode,
+  centered = true,
+}: Props) {
   const mutation = usePayModesMutation({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         onClose();
         toast.success();
-        
+
         return null;
       }
 
@@ -27,7 +31,7 @@ function PayModeFormModal({ opened, onClose, payMode, centered = true }: Props) 
     onError: () => {
       toast.error();
     },
-    model: payMode
+    model: payMode,
   });
 
   const handleSubmit = (payMode: IPayMode) => {

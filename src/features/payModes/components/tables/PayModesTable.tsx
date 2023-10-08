@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "../../../../components/tables/Table";
 import { filterFns } from "../../../../components/tables/filterFns";
 import { IPayMode } from "../../types";
-import { Anchor } from '@mantine/core';
+import { Anchor } from "src/components/base";
 import { usePayModes } from "../../hooks/payModes";
 import { useFeaturePermissions } from "../../../accessControl/hooks/permissions";
 import { Routes } from "../../../../navigation/routes";
 
-interface Props{
+interface Props {
   filters: {
     keyword?: string;
   };
@@ -16,8 +16,7 @@ interface Props{
   onEdit?: (payMode: IPayMode) => void;
 }
 
-function PayModesTable({ filters, onSelect, onEdit }: Props){
-
+function PayModesTable({ filters, onSelect, onEdit }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { keyword } = filters;
 
@@ -36,11 +35,7 @@ function PayModesTable({ filters, onSelect, onEdit }: Props){
     () => [
       {
         header: "Name",
-        cell: (row) => (
-          <Anchor component="span" fz="sm">
-            {`${row.renderValue()}`}
-          </Anchor>
-        ),
+        cell: (row) => <Anchor fz="sm">{`${row.renderValue()}`}</Anchor>,
         accessorKey: "name",
       },
       {
@@ -54,7 +49,7 @@ function PayModesTable({ filters, onSelect, onEdit }: Props){
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  }
+  };
 
   return (
     <>

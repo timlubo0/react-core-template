@@ -1,16 +1,15 @@
-import { z } from 'zod';
-import { useForm, zodResolver } from '@mantine/form';
-import { TextInput, Button, Box, Group } from '@mantine/core';
-import { ICurrency } from '../../types';
+import { z } from "zod";
+import { useForm, zodResolver } from "@mantine/form";
+import { TextInput, Button, Box, Group } from "src/components/base";
+import { ICurrency } from "../../types";
 
-interface Props{
+interface Props {
   onSubmit: (data: ICurrency) => void;
   isLoading: boolean;
   currency?: ICurrency;
 }
 
 function CurrencyForm({ onSubmit, isLoading, currency }: Props) {
-
   const schema = z.object({
     name: z.string().min(3, { message: "Minimum 3 caracteres" }),
   });
@@ -18,7 +17,7 @@ function CurrencyForm({ onSubmit, isLoading, currency }: Props) {
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
-      name: currency?.name || ''
+      name: currency?.name || "",
     },
   });
 
@@ -31,8 +30,8 @@ function CurrencyForm({ onSubmit, isLoading, currency }: Props) {
           placeholder="Designation..."
           {...form.getInputProps("name")}
         />
-   
-        <Group mt="xl" position="right">
+
+        <Group mt="xl" align="right">
           <Button mt="xl" size="sm" type="submit" loading={isLoading}>
             Enregistrer
           </Button>

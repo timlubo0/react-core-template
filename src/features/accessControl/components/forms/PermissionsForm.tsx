@@ -1,5 +1,6 @@
 import { useForm } from "@mantine/form";
-import { Button, Box, Group, Flex, Checkbox } from "../../../../components/base";
+import { Checkbox } from "@mantine/core";
+import { Button, Box, Group, Flex } from "../../../../components/base";
 import { IFeature, IPermission, IRole } from "../../types";
 import { useFeatures } from "../../hooks/features";
 

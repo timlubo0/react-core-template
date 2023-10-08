@@ -1,21 +1,28 @@
-import { z } from 'zod';
-import { useForm, zodResolver } from '@mantine/form';
-import { TextInput, Button, Box, Group, Select, ActionIcon, Loader } from '@mantine/core';
-import { ICompany } from '../../types';
-import { IconCirclePlus } from '@tabler/icons-react';
-import { useCompanyCategories } from '../../hooks/companyCategories';
-import { useSelectMemo } from '../../../../hooks/useSelectMemo';
-import { useDisclosure } from '@mantine/hooks';
-import CompanyCategoryFormModal from '../modals/CompanyCategoryFormModal';
+import { z } from "zod";
+import { useForm, zodResolver } from "@mantine/form";
+import {
+  TextInput,
+  Button,
+  Box,
+  Group,
+  Select,
+  ActionIcon,
+  Loader,
+} from "src/components/base";
+import { ICompany } from "../../types";
+import { IconCirclePlus } from "@tabler/icons-react";
+import { useCompanyCategories } from "../../hooks/companyCategories";
+import { useSelectMemo } from "../../../../hooks/useSelectMemo";
+import { useDisclosure } from "@mantine/hooks";
+import CompanyCategoryFormModal from "../modals/CompanyCategoryFormModal";
 
-interface Props{
+interface Props {
   onSubmit: (data: ICompany) => void;
   isLoading: boolean;
   company?: ICompany;
 }
 
 function CompanyForm({ onSubmit, isLoading, company }: Props) {
-
   const companyCategoryFormModal = useDisclosure();
 
   const schema = z.object({
@@ -41,16 +48,18 @@ function CompanyForm({ onSubmit, isLoading, company }: Props) {
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
-      name: company?.name || '',
-      nif: company?.nif || '',
-      idNat: company?.idNat || '',
-      rccm: company?.rccm || '',
-      companyCategoryId: company?.category?.id || ''
+      name: company?.name || "",
+      nif: company?.nif || "",
+      idNat: company?.idNat || "",
+      rccm: company?.rccm || "",
+      companyCategoryId: company?.category?.id || "",
     },
   });
 
-  const companyCategoriesQuery = useCompanyCategories({ per_page : 100});
-  const companyCategories = useSelectMemo({data: companyCategoriesQuery.data});
+  const companyCategoriesQuery = useCompanyCategories({ per_page: 100 });
+  const companyCategories = useSelectMemo({
+    data: companyCategoriesQuery.data,
+  });
 
   return (
     <Box>
@@ -65,9 +74,7 @@ function CompanyForm({ onSubmit, isLoading, company }: Props) {
           label="Categorie d'entreprise"
           placeholder="Choisir une categorie"
           searchable
-          nothingFound="No options"
           data={companyCategories}
-          dropdownPosition="bottom"
           maxDropdownHeight={280}
           rightSection={
             <ActionIcon onClick={() => companyCategoryFormModal[1].open()}>
@@ -98,16 +105,16 @@ function CompanyForm({ onSubmit, isLoading, company }: Props) {
           {...form.getInputProps("rccm")}
         />
 
-        <Group mt="xl" position="right">
+        <Group mt="xl" align="right">
           <Button mt="xl" size="sm" type="submit" loading={isLoading}>
             Enregistrer
           </Button>
         </Group>
       </form>
-      <CompanyCategoryFormModal 
+      <CompanyCategoryFormModal
         opened={companyCategoryFormModal[0]}
         onClose={companyCategoryFormModal[1].close}
-        centered={false} 
+        centered={false}
       />
     </Box>
   );

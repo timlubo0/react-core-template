@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Stack } from "@mantine/core";
-import { useDisclosure } from '@mantine/hooks';
+import { Stack } from "src/components/base";
+import { useDisclosure } from "@mantine/hooks";
 import CrudHeader from "../../../components/CrudHeader";
 import { IUSerPayMode } from "../types";
-import { IconTrash } from '@tabler/icons-react';
+import { IconTrash } from "@tabler/icons-react";
 import { CrudActionProps } from "../../../components/CrudActionButtons";
 import { deleteModal } from "../../../utils/modal";
 import { toast } from "../../../utils/toast";
@@ -13,22 +13,23 @@ import UserPayModeFormModal from "../components/modals/UserPayModeFormModal";
 import { useFeaturePermissions } from "../../accessControl/hooks/permissions";
 import { Routes } from "../../../navigation/routes";
 
-interface Props{
+interface Props {
   userId?: any;
 }
 
-function UserPayModesScreen({ userId }: Props){
-
+function UserPayModesScreen({ userId }: Props) {
   const userPayModeFormModal = useDisclosure(false);
   const [userPayMode, setUserPayMode] = useState<IUSerPayMode>();
-  const [selectedUserPayModes, setSelectedUserPayModes] = useState<IUSerPayMode[]>([]);
+  const [selectedUserPayModes, setSelectedUserPayModes] = useState<
+    IUSerPayMode[]
+  >([]);
   const [showActions, setShowActions] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>();
   const permissionsChecker = useFeaturePermissions();
 
   const deleteMutation = useUserPayModeDelete({
     onSuccess: (response) => {
-      if(response.status === true){
+      if (response.status === true) {
         toast.success();
         return null;
       }
@@ -46,7 +47,9 @@ function UserPayModesScreen({ userId }: Props){
       onClick: () =>
         deleteModal.show({
           onConfirm: () => {
-            selectedUserPayModes.map((userPayMode) => deleteMutation.mutate(`${userPayMode.uid}`));
+            selectedUserPayModes.map((userPayMode) =>
+              deleteMutation.mutate(`${userPayMode.uid}`)
+            );
           },
         }),
     },
@@ -55,18 +58,18 @@ function UserPayModesScreen({ userId }: Props){
   const handleSelection = (userPayModes: IUSerPayMode[]) => {
     userPayModes.length > 0 ? setShowActions(true) : setShowActions(false);
     setSelectedUserPayModes(userPayModes);
-  }
+  };
 
   const handleEdit = (userPayMode: IUSerPayMode) => {
     setUserPayMode(userPayMode);
     userPayModeFormModal[1].open();
-  }
+  };
 
   const handleAdd = () => {
     setUserPayMode(undefined);
     userPayModeFormModal[1].open();
-  }
-  
+  };
+
   return (
     <Stack p={"lg"}>
       <CrudHeader
