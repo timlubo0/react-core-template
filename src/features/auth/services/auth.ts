@@ -7,11 +7,11 @@ export type LoginResponse = {
   user: string;
   access_token?: string;
   message?: string;
-}
+};
 
 export const authService = {
   login: (credentials: ILogin): Promise<LoginResponse> =>
     api.post({ endPoint: endPoints.login, data: credentials }),
-  resetPasswordOtp: (payload: IUser): Promise<{status: boolean}> =>
+  resetPasswordOtp: (payload: IUser): Promise<{ status: boolean }> =>
     api.post({ endPoint: endPoints.otpPasswordReset, data: payload }),
 };
