@@ -14,3 +14,8 @@ export * from './Loader';
 export * from './LoadingOverlay';
 export * from './Center';
 export * from './Menu';
+export * from './SimpleGrid';
+export * from './Image';
+export * from './Progress';
+export * from './Box';
+export * from './Popover';

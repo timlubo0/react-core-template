@@ -1,12 +1,15 @@
 import {
   BoxMod,
+  BoxProps,
   Text as MText,
   MantineColor,
   MantineGradient,
   MantineSize,
+  StylesApiProps,
+  TextFactory,
 } from "@mantine/core";
 
-export interface TextProps {
+export interface TextProps extends BoxProps, StylesApiProps<TextFactory> {
   __staticSelector?: string;
   mod?: BoxMod;
   size?: MantineSize | (string & {});
