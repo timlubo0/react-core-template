@@ -22,3 +22,5 @@ export * from './Popover';
 export * from './TextInput';
 export * from './Textarea';
 export * from './Modal';
+export * from './Badge';
+export * from './Anchor';

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "../../../../components/tables/Table";
 import { filterFns } from "../../../../components/tables/filterFns";
 import { IRole } from "../../types";
-import { Badge, Anchor } from '@mantine/core';
+import { Badge } from "../../../../components/base";
 import { useRoles } from "../../hooks/roles";
 import { Link } from "react-router-dom";
 import { Routes } from "../../../../navigation/routes";
 import { useFeaturePermissions } from "../../hooks/permissions";
 
-interface Props{
+interface Props {
   filters: {
     keyword?: string;
   };
@@ -17,8 +17,7 @@ interface Props{
   onEdit?: (role: IRole) => void;
 }
 
-function RolesTable({ filters, onSelect, onEdit }: Props){
-
+function RolesTable({ filters, onSelect, onEdit }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { keyword } = filters;
 
@@ -38,9 +37,9 @@ function RolesTable({ filters, onSelect, onEdit }: Props){
       {
         header: "Name",
         cell: (row) => (
-          <Anchor component="span" fz="sm">
-            <Link to={`${Routes.roles}/${row.row.original.uid}${Routes.permissions}`}>{`${row.renderValue()}`}</Link>
-          </Anchor>
+          <Link
+            to={`${Routes.roles}/${row.row.original.uid}${Routes.permissions}`}
+          >{`${row.renderValue()}`}</Link>
         ),
         accessorKey: "name",
       },
@@ -50,7 +49,6 @@ function RolesTable({ filters, onSelect, onEdit }: Props){
           <Badge
             variant="gradient"
             gradient={{ from: "indigo", to: "cyan" }}
-            component="span"
             tt={"lowercase"}
           >{`${row.renderValue()}`}</Badge>
         ),
@@ -62,7 +60,7 @@ function RolesTable({ filters, onSelect, onEdit }: Props){
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  }
+  };
 
   return (
     <>
