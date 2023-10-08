@@ -27,3 +27,5 @@ export * from './Anchor';
 export * from './Title';
 export * from './Avatar';
 export * from './UnstyledButton';
+export * from './PasswordInput';
+export * from './Select';

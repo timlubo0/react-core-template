@@ -1,15 +1,30 @@
-import { z } from 'zod';
-import { useForm, zodResolver } from '@mantine/form';
-import { useDisclosure } from '@mantine/hooks';
-import { PasswordInput, TextInput, Button, Box, Group, NativeSelect, ActionIcon, Loader } from '@mantine/core';
-import { IconLock, IconMail, IconUser, IconPhone, IconCirclePlus } from '@tabler/icons-react';
-import { IUser } from '../../types';
-import InputPasswordWrapper from '../../../../components/InputPasswordWrapper';
-import { useRoles } from '../../../accessControl/hooks/roles';
-import { useSelectMemo } from '../../../../hooks/useSelectMemo';
-import RoleFormModal from '../../../accessControl/components/modals/RoleFormModal';
+import { z } from "zod";
+import { useForm, zodResolver } from "@mantine/form";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  PasswordInput,
+  TextInput,
+  Button,
+  Box,
+  Group,
+  Select,
+  ActionIcon,
+  Loader,
+} from "../../../../components/base";
+import {
+  IconLock,
+  IconMail,
+  IconUser,
+  IconPhone,
+  IconCirclePlus,
+} from "@tabler/icons-react";
+import { IUser } from "../../types";
+import InputPasswordWrapper from "../../../../components/InputPasswordWrapper";
+import { useRoles } from "../../../accessControl/hooks/roles";
+import { useSelectMemo } from "../../../../hooks/useSelectMemo";
+import RoleFormModal from "../../../accessControl/components/modals/RoleFormModal";
 
-interface Props{
+interface Props {
   onSubmit: (data: IUser) => void;
   isLoading: boolean;
   user?: IUser;
@@ -27,22 +42,25 @@ function UserForm({ onSubmit, isLoading, user }: Props) {
       .min(9, { message: "minimum 9 chiffres" }),
     password: z
       .string()
-      .min(8, 'Includes at least 8 characters')
+      .min(8, "Includes at least 8 characters")
       .refine((value) => /[0-9]/.test(value), "Includes number")
       .refine((value) => /[a-z]/.test(value), "Includes lowercase letter")
       .refine((value) => /[A-Z]/.test(value), "Includes uppercase letter")
-      .refine((value) => /[$&+,:;=?@#|'<>.^*()%!-]/.test(value), "Includes special symbol"),
+      .refine(
+        (value) => /[$&+,:;=?@#|'<>.^*()%!-]/.test(value),
+        "Includes special symbol"
+      ),
     roleId: z.string(),
   });
 
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
-      name: user?.name || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
-      password: user ? 'timS@234!' : '',
-      roleId: user?.role?.id || ''
+      name: user?.name || "",
+      email: user?.email || "",
+      phone: user?.phone || "",
+      password: user ? "timS@234!" : "",
+      roleId: user?.role?.id || "",
     },
   });
 
@@ -59,14 +77,14 @@ function UserForm({ onSubmit, isLoading, user }: Props) {
             label="Nom complet"
             placeholder="Nom & Prenom"
             {...form.getInputProps("name")}
-            icon={<IconUser size={"1rem"} />}
+            leftSection={<IconUser size={"1rem"} />}
           />
           <TextInput
             withAsterisk
             label="Email"
             placeholder="example@mail.com"
             {...form.getInputProps("email")}
-            icon={<IconMail size={"1rem"} />}
+            leftSection={<IconMail size={"1rem"} />}
           />
         </Group>
         <TextInput
@@ -76,9 +94,9 @@ function UserForm({ onSubmit, isLoading, user }: Props) {
           description="Le numéro de téléphone doit avoir 9 chiffres"
           placeholder="99.."
           {...form.getInputProps("phone")}
-          icon={<IconPhone size={"1rem"} />}
+          leftSection={<IconPhone size={"1rem"} />}
         />
-        <NativeSelect
+        <Select
           withAsterisk
           label="Role"
           placeholder="Choisissez un role"
@@ -100,7 +118,7 @@ function UserForm({ onSubmit, isLoading, user }: Props) {
                 label="Mot de passe"
                 withAsterisk
                 {...form.getInputProps("password")}
-                icon={<IconLock size={"1rem"} />}
+                leftSection={<IconLock size={"1rem"} />}
               />
             </InputPasswordWrapper>
             {/* <PasswordInput
@@ -112,7 +130,7 @@ function UserForm({ onSubmit, isLoading, user }: Props) {
           </Group>
         )}
 
-        <Group mt="xl" position="right">
+        <Group mt="xl" align="right">
           <Button mt="xl" size="sm" type="submit" loading={isLoading}>
             Enregistrer
           </Button>
