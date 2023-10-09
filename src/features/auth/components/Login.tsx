@@ -47,12 +47,6 @@ function Login() {
 
   return (
     <Box>
-      <Title order={2} ta="center" mt="md" mb={20}>
-        Bienvenue sur Lido Taxi!
-      </Title>
-      <Text size={"xs"} ta={"center"} mb={30}>
-        Veuillez vous connecter à votre compte et commencer l'aventure.
-      </Text>
       <LoginForm onSubmit={handleSubmit} isLoading={login.isLoading} />
     </Box>
   );

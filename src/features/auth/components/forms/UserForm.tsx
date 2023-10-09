@@ -60,7 +60,7 @@ function UserForm({ onSubmit, isLoading, user }: Props) {
       email: user?.email || "",
       phone: user?.phone || "",
       password: user ? "timS@234!" : "",
-      roleId: user?.role?.id || "",
+      roleId: `${user?.role?.id}` || "",
     },
   });
 

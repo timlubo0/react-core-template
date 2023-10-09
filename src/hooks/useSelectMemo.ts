@@ -15,7 +15,7 @@ export const useSelectMemo = ({ key = 'id', value = 'name', data, ...rest }: Pro
     const selectData: ISelect[] = useMemo(() => {
         if (data === undefined) return [];
         return data.map((row) => ({
-          value: row[key],
+          value: `${row[key]}`,
           label: row[value],
           ...rest
         }));

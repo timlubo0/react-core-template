@@ -1,14 +1,14 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom";
 
 interface GuardedRouteProps {
-	isRouteAccessible?: boolean;
-	redirectRoute?: string;
+  isRouteAccessible?: boolean;
+  redirectRoute?: string;
 }
 
 const RouteGuard = ({
-	isRouteAccessible = false,
-	redirectRoute = '/',
+  isRouteAccessible = false,
+  redirectRoute = "/",
 }: GuardedRouteProps): JSX.Element =>
-	isRouteAccessible ? <Outlet /> : <Navigate to={redirectRoute} replace />;
+  isRouteAccessible ? <Outlet /> : <Navigate to={redirectRoute} replace />;
 
 export default RouteGuard;

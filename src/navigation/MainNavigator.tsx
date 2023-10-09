@@ -6,22 +6,22 @@ import {
 import LoginScreen from "../features/auth/screens/LoginScreen";
 import { useAuth } from "../features/auth/hooks/auth";
 import RouteGuard from "./RouteGuard";
-// import DashboardScreen from "../features/dashboard/screens/DashboardScreen";
+import DashboardScreen from "../features/dashboard/screens/DashboardScreen";
 import { PageNotFoundScreen } from "../features/errors/screens/PageNotFoundScreen";
 import UsersScreen from "../features/auth/screens/UsersScreen";
 import { Routes as appRoutes } from "./routes";
 import RolesScreen from "../features/accessControl/screens/RolesScreen";
 import RolePermissionsScreen from "../features/accessControl/screens/RolePermissionsScreen";
-// import CitiesScreen from "../features/cities/screens/CitiesScreen";
-// import CurrenciesScreen from "../features/currencies/screens/CurrenciesScreen";
-// import PayModesScreen from "../features/payModes/screens/PayModesScreen";
-// import RatesScreen from "../features/rates/screens/RatesScreen";
+import CitiesScreen from "../features/cities/screens/CitiesScreen";
+import CurrenciesScreen from "../features/currencies/screens/CurrenciesScreen";
+import PayModesScreen from "../features/payModes/screens/PayModesScreen";
+import RatesScreen from "../features/rates/screens/RatesScreen";
 import UserDetailsScreen from "../features/auth/screens/UserDetailsScreen";
 import { useFeaturePermissions } from "src/features/accessControl/hooks/permissions";
 import { AccessDeniedScreen } from "../features/errors/screens/AccessDeniedScreen";
-// import UserProfileScreen from "../features/auth/screens/UserProfileScreen";
-// import CompaniesScreen from "../features/companies/screens/CompaniesScreen";
-// import ReportsScreen from "../features/report/screens/ReportsScreen";
+import UserProfileScreen from "../features/auth/screens/UserProfileScreen";
+import CompaniesScreen from "../features/companies/screens/CompaniesScreen";
+import ReportsScreen from "../features/report/screens/ReportsScreen";
 
 export default function MainNavigator() {
 
@@ -33,7 +33,7 @@ export default function MainNavigator() {
       <Route path={appRoutes.login} element={<LoginScreen />} />
       <Route path={appRoutes.notFound} element={<PageNotFoundScreen />} />
       <Route path={appRoutes.denied} element={<AccessDeniedScreen />} />
-      {/* <Route
+      <Route
         path={appRoutes.home}
         element={
           <RouteGuard
@@ -45,7 +45,7 @@ export default function MainNavigator() {
         }
       >
         <Route path={appRoutes.home} element={<DashboardScreen />} />
-      </Route> */}
+      </Route>
       <Route
         path={appRoutes.users}
         element={
@@ -104,7 +104,7 @@ export default function MainNavigator() {
           element={<RolePermissionsScreen />}
         />
       </Route>
-      {/* <Route
+      <Route
         path={appRoutes.cities}
         element={
           <RouteGuard
@@ -169,7 +169,7 @@ export default function MainNavigator() {
       >
         <Route path={appRoutes.userProfile} element={<UserProfileScreen />} />
       </Route>
-      <Route path="*" element={<Navigate to={appRoutes.notFound} />} /> */}
+      <Route path="*" element={<Navigate to={appRoutes.notFound} />} />
     </Routes>
   ); 
 }

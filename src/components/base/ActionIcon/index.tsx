@@ -26,29 +26,6 @@ export interface ActionIconProps
   children?: React.ReactNode;
 }
 
-export const ActionIcon = ({
-  __staticSelector,
-  loading,
-  loaderProps,
-  size,
-  color,
-  radius,
-  gradient,
-  disabled,
-  children,
-}: ActionIconProps) => {
-  return (
-    <MActionIcon
-      __staticSelector={__staticSelector}
-      loading={loading}
-      loaderProps={loaderProps}
-      size={size}
-      color={color}
-      radius={radius}
-      gradient={gradient}
-      disabled={disabled}
-    >
-      {children}
-    </MActionIcon>
-  );
+export const ActionIcon = (props: ActionIconProps) => {
+  return <MActionIcon {...props} />;
 };

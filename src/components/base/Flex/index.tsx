@@ -22,24 +22,8 @@ export interface FlexProps
   children: React.ReactNode;
 }
 
-export const Flex = ({
-  gap,
-  rowGap,
-  columnGap,
-  align,
-  justify,
-  wrap,
-  direction,
-}: FlexProps) => {
+export const Flex = (props: FlexProps) => {
   return (
-    <MFlex
-      gap={gap}
-      rowGap={rowGap}
-      columnGap={columnGap}
-      align={align}
-      justify={justify}
-      wrap={wrap}
-      direction={direction}
-    />
+    <MFlex {...props} />
   );
 };

@@ -1,5 +1,5 @@
 import { Container } from "@mantine/core";
-import { Group, ActionIcon } from "src/components/base";
+import { Group, ActionIcon, Flex, Paper } from "src/components/base";
 import {
   IconBrandTwitter,
   IconBrandYoutube,
@@ -9,8 +9,8 @@ import Logo from "src/components/Logo";
 
 export function AppFooter() {
   return (
-    <div>
-      <Container>
+    <Paper p={5}>
+      <Flex justify={"space-between"} align={"center"}>
         <Logo />
         <Group gap={0} align="right">
           <ActionIcon size="lg">
@@ -23,7 +23,7 @@ export function AppFooter() {
             <IconBrandInstagram size="1.05rem" stroke={1.5} />
           </ActionIcon>
         </Group>
-      </Container>
-    </div>
+      </Flex>
+    </Paper>
   );
 }

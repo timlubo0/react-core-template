@@ -22,27 +22,6 @@ export interface GroupProps
   children: ReactNode;
 }
 
-export const Group = ({
-  size,
-  justify,
-  align,
-  wrap,
-  gap,
-  grow,
-  preventGrowOverflow,
-  children,
-}: GroupProps) => {
-  return (
-    <MGroup
-      __size={size}
-      justify={justify}
-      align={align}
-      wrap={wrap}
-      gap={gap}
-      grow={grow}
-      preventGrowOverflow={preventGrowOverflow}
-    >
-      {children}
-    </MGroup>
-  );
+export const Group = (props: GroupProps) => {
+  return <MGroup {...props} />;
 };

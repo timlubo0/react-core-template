@@ -43,19 +43,19 @@ function LoginForm({ onSubmit, isLoading }: Props) {
           leftSection={<IconMail size={"1rem"} />}
         />
         <PasswordInput
-          placeholder="Mot de passe"
-          label="Mot de passe"
+          placeholder="Password"
+          label="Password"
           withAsterisk
           {...form.getInputProps("password")}
           leftSection={<IconLock size={"1rem"} />}
         />
         <Flex justify={"space-between"}>
-          <Checkbox label="Se souvenir de moi" mt="xl" size="xs" />
-          <Link to={""}>Mot de passe oublié?</Link>
+          <Checkbox label="Remember me" mt="xl" size="xs" />
+          <Link to={""}>Forgot your password?</Link>
         </Flex>
         <Group mt="xl">
           <Button fullWidth mt="xl" size="md" type="submit" loading={isLoading}>
-            S'authentifier
+            Login
           </Button>
         </Group>
       </form>
