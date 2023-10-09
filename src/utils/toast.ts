@@ -9,6 +9,8 @@ interface Props {
 export const toast = {
   show: ({ message, color = "success" }: Props) =>
     color === "success" ? tToast.success(message) : tToast.error(message),
-  success: () => tToast.success("Enregistrement reussi"),
-  error: () => tToast.error("Echec d'enregistrement"),
+  success: (message?: string) =>
+    tToast.success(message || "Enregistrement reussi"),
+  error: (message?: string) =>
+    tToast.error(message || "Echec d'enregistrement"),
 };
