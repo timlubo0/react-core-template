@@ -8,6 +8,7 @@ import {
   Group,
   Checkbox,
   Flex,
+  Text,
 } from "../../../../components/base";
 import { IconLock, IconMail } from "@tabler/icons-react";
 import { ILogin } from "../../types";
@@ -49,12 +50,14 @@ function LoginForm({ onSubmit, isLoading }: Props) {
           {...form.getInputProps("password")}
           leftSection={<IconLock size={"1rem"} />}
         />
-        <Flex justify={"space-between"}>
-          <Checkbox label="Remember me" mt="xl" size="xs" />
-          <Link to={""}>Forgot your password?</Link>
+        <Flex justify={"space-between"} align={"center"} mt="md">
+          <Checkbox label="Remember me" size="xs" />
+          <Link to={""}>
+            <Text size="xs">Forgot your password?</Text>
+          </Link>
         </Flex>
-        <Group mt="xl">
-          <Button fullWidth mt="xl" size="md" type="submit" loading={isLoading}>
+        <Group mt="md">
+          <Button fullWidth size="md" type="submit" loading={isLoading}>
             Login
           </Button>
         </Group>
