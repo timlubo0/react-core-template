@@ -1,24 +1,14 @@
-import { notifications } from "@mantine/notifications";
+import { toast as tToast } from "react-toastify";
 
 interface Props {
-  title: string;
+  title?: string;
   message: string;
-  color?: string;
+  color?: "success" | "error" | "warning" | "red" | "green";
 }
 
 export const toast = {
-  show: ({ title, message, color = "green" }: Props) =>
-    notifications.show({ title, message, color }),
-  success: () =>
-    notifications.show({
-      title: "Enregistrement",
-      message: "Enregistrement reussi",
-      color: "green",
-    }),
-  error: () =>
-    notifications.show({
-      title: "Echec",
-      message: "Echec d'enregistrement",
-      color: "red",
-    }),
+  show: ({ message, color = "success" }: Props) =>
+    color === "success" ? tToast.success(message) : tToast.error(message),
+  success: () => tToast.success("Enregistrement reussi"),
+  error: () => tToast.error("Echec d'enregistrement"),
 };
