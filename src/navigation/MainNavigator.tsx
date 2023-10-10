@@ -22,6 +22,8 @@ import { AccessDeniedScreen } from "../features/errors/screens/AccessDeniedScree
 import UserProfileScreen from "../features/auth/screens/UserProfileScreen";
 import CompaniesScreen from "../features/companies/screens/CompaniesScreen";
 import ReportsScreen from "../features/report/screens/ReportsScreen";
+import ForgotPasswordScreen from "src/features/auth/screens/ForgotPasswordScreen";
+import ResetForgotPasswordScreen from "src/features/auth/screens/ResetForgotPasswordScreen";
 
 export default function MainNavigator() {
 
@@ -31,6 +33,8 @@ export default function MainNavigator() {
   return (
     <Routes>
       <Route path={appRoutes.login} element={<LoginScreen />} />
+      <Route path={appRoutes.passwordForgot} element={<ForgotPasswordScreen />} />
+      <Route path={appRoutes.passwordReset} element={<ResetForgotPasswordScreen />} />
       <Route path={appRoutes.notFound} element={<PageNotFoundScreen />} />
       <Route path={appRoutes.denied} element={<AccessDeniedScreen />} />
       <Route

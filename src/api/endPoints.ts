@@ -1,5 +1,7 @@
 export const endPoints = {
     login: 'login',
+    otp: 'otp',
+    passwordReset: 'password_reset',
     otpPasswordReset: 'otp_password_reset',
     users: 'users',
     roles: 'roles',

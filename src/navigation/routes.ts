@@ -1,5 +1,7 @@
 export const Routes = {
   login: "/",
+  passwordForgot: "/password-forgot",
+  passwordReset: "/password-reset",
   home: "/home",
   notFound: "/404",
   denied: "/401",
@@ -32,4 +34,9 @@ export const Routes = {
   reports: "/reports",
 };
 
-export const excludeInAppLayoutRoutes = [Routes.login, Routes.notFound];
+export const excludeInAppLayoutRoutes = [
+  Routes.login,
+  Routes.notFound,
+  Routes.passwordForgot,
+  Routes.passwordReset,
+];

@@ -1,6 +1,6 @@
 import { Modal } from "../../../../components/base";
 import { toast } from "../../../../utils/toast";
-import { useAuth, useResetPasswordOtp } from "../../hooks/auth";
+import { useAuth, useResetPassword } from "../../hooks/auth";
 import ResetPasswordForm from "../forms/ResetPasswordForm";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 function ResetPasswordFormModal({ opened, onClose, centered = true }: Props) {
   const auth = useAuth();
 
-  const mutation = useResetPasswordOtp({
+  const mutation = useResetPassword({
     onSuccess: (response) => {
       if (response.status === true) {
         onClose();

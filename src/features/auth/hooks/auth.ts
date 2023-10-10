@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { LoginResponse, authService } from "../services/auth";
-import { ILogin, IUser } from "../types";
+import { ILogin, IPasswordReset, IUser } from "../types";
 import secureLocalStorage from "react-secure-storage";
 
 export const useAuth = () => {
@@ -44,16 +44,16 @@ export const useLogin = ({
   return loginMutation;
 };
 
-export const useResetPasswordOtp = ({
+export const useResetPassword = ({
   onSuccess,
   onError,
 }: {
   onSuccess?: (response: { status: boolean }) => void;
   onError?: (error?: unknown) => void;
 }) => {
-  const loginMutation = useMutation({
-    mutationFn: (credentials: IUser) =>
-      authService.resetPasswordOtp(credentials),
+  const mutation = useMutation({
+    mutationFn: (credentials: IPasswordReset) =>
+      authService.resetPassword(credentials),
     onSuccess: (response) => {
       onSuccess?.(response);
     },
@@ -62,5 +62,26 @@ export const useResetPasswordOtp = ({
     },
   });
 
-  return loginMutation;
+  return mutation;
+};
+
+export const useOtp = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: (response: { status: boolean }) => void;
+  onError?: (error?: unknown) => void;
+}) => {
+  const mutation = useMutation({
+    mutationFn: (payload: { email: string }) =>
+      authService.otp(payload),
+    onSuccess: (response) => {
+      onSuccess?.(response);
+    },
+    onError: (error) => {
+      onError?.(error);
+    },
+  });
+
+  return mutation;
 };

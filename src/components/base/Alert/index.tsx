@@ -1,6 +1,17 @@
-import { Alert as MAlert, MantineColor, MantineRadius } from "@mantine/core";
+import {
+  AlertFactory,
+  BoxProps,
+  ElementProps,
+  Alert as MAlert,
+  MantineColor,
+  MantineRadius,
+  StylesApiProps,
+} from "@mantine/core";
 
-export interface AlertProps {
+export interface AlertProps
+  extends BoxProps,
+    StylesApiProps<AlertFactory>,
+    ElementProps<"div", "title"> {
   radius?: MantineRadius;
   color?: MantineColor;
   title?: React.ReactNode;

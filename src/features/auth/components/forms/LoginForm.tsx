@@ -13,6 +13,7 @@ import {
 import { IconLock, IconMail } from "@tabler/icons-react";
 import { ILogin } from "../../types";
 import { Link } from "react-router-dom";
+import { Routes } from "src/navigation/routes";
 
 interface Props {
   onSubmit: (data: ILogin) => void;
@@ -52,7 +53,7 @@ function LoginForm({ onSubmit, isLoading }: Props) {
         />
         <Flex justify={"space-between"} align={"center"} mt="md">
           <Checkbox label="Remember me" size="xs" />
-          <Link to={""}>
+          <Link to={`${Routes.passwordForgot}`}>
             <Text size="xs">Forgot your password?</Text>
           </Link>
         </Flex>
