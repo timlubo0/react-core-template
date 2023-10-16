@@ -1,13 +1,13 @@
 import { MantineProvider } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import MainNavigator from "./navigation/MainNavigator";
 import AppLayout from "./layouts/AppLayout";
 import { useBeforeRender } from "./hooks/useBeforeRender";
 import { ReactNode } from "react";
+import { theme } from "src/utils/theme";
 
 const queryClient = new QueryClient();
 
@@ -30,9 +30,8 @@ export default function App({ children }: { children?: ReactNode }) {
   }, []);
 
   return (
-    <MantineProvider>
+    <MantineProvider theme={theme}>
       <ModalsProvider>
-        <Notifications autoClose={4000} position="top-right" />
         <ToastContainer />
         <QueryClientProvider client={queryClient}>
           <Router>
